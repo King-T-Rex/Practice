@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Подключено пространства имён JavaFX — без этого элементы типа Button, Label не будут распознаны -->
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<!-- Корневой элемент интерфейса — BorderPane (делит окно на центр, верх, низ, лево, право) -->
+<!-- fx:controller — указывает, какой контроллер управляется этим интерфейсом -->
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ArithmeticController">
+
+    <!-- Центральная часть окна — здесь размещает сетку с полями ввода -->
+    <center>
+        <!-- GridPane — таблица: строки и столбцы -->
+        <GridPane hgap="10" vgap="10"> <!-- hgap/vgap — отступы между элементами по горизонтали и вертикали -->
+
+            <!-- Отступы вокруг всей сетки -->
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- Описывает столбцы: первый — для надписей (ширина 60), второй — для полей ввода (ширина 150) -->
+            <columnConstraints>
+                <ColumnConstraints minWidth="60"/>
+                <ColumnConstraints minWidth="150"/>
+            </columnConstraints>
+
+            <!-- Описывает строки (по три — по числу полей ввода) -->
+            <rowConstraints>
+                <RowConstraints minHeight="25"/>
+                <RowConstraints minHeight="25"/>
+                <RowConstraints minHeight="25"/>
+            </rowConstraints>
+
+            <!-- Первая строка: метка "x:" и поле ввода -->
+            <Label text="x:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <!-- fx:id — связывает это поле с @FXML private TextField fieldX в контроллере -->
+            <TextField fx:id="fieldX" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <!-- Вторая строка: "y:" -->
+            <Label text="y:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="fieldY" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <!-- Третья строка: "z:" -->
+            <Label text="z:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="fieldZ" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <!-- Кнопка "Вычислить" — занимает всю ширину (columnSpan="2") -->
+            <!-- onAction="#onCalculate" — при нажатии вызовется метод onCalculate() в контроллере -->
+            <Button text="Вычислить" onAction="#onCalculate" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+        </GridPane>
+    </center>
+
+    <!-- Нижняя часть окна — здесь выводит результаты -->
+    <bottom>
+        <!-- BorderPane внутри — просто чтобы занять всю нижнюю часть -->
+        <BorderPane prefHeight="250">
+            <center>
+                <!-- VBox — располагает элементы вертикально (один под другим) -->
+                <VBox spacing="10"> <!-- spacing — отступ между элементами -->
+
+                    <!-- Отступы вокруг VBox -->
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+
+                    <!-- Заголовок -->
+                    <Label text="Результаты:" />
+
+                    <!-- Результат a: метка "a:" и значение -->
+                    <HBox spacing="10"> <!-- HBox — располагает элементы горизонтально -->
+                        <Label text="a:" />
+                        <!-- fx:id — связывается с lblA в контроллере -->
+                        <!-- style — делаем текст жирным и крупным -->
+                        <Label fx:id="lblA" text="---" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                    </HBox>
+
+                    <!-- Результат b -->
+                    <HBox spacing="10">
+                        <Label text="b:" />
+                        <Label fx:id="lblB" text="---" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                    </HBox>
+
+                    <!-- Поле для подробного отчёта -->
+                    <!-- editable="false" — нельзя редактировать, только читать -->
+                    <!-- wrapText="true" — текст переносится по словам -->
+                    <TextArea fx:id="txtReport" editable="false" prefRowCount="8" wrapText="true"/>
+                </VBox>
+            </center>
+        </BorderPane>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Подключает пространства имён — чтобы JavaFX знал, какие элементы использовать -->
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<!-- Корневой элемент — BorderPane (делит окно на центр, верх, низ, лево, право) -->
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.DigitController"> <!-- Контроллер, который будет управлять этим окном -->
+
+    <!-- Центральная часть окна -->
+    <center>
+        <!-- VBox — располагает элементы вертикально (один под другим) -->
+        <VBox spacing="15" alignment="CENTER"> <!-- spacing=15 — отступ между элементами -->
+            <!-- Отступы вокруг всей VBox -->
+            <padding>
+                <Insets top="20" bottom="20" left="20" right="20"/>
+            </padding>
+
+            <!-- Текстовая подсказка для пользователя -->
+            <Label text="Введите натуральное число n:" style="-fx-font-size: 14px;"/>
+
+            <!-- HBox — располагает элементы горизонтально (в строку) -->
+            <HBox spacing="10" alignment="CENTER">
+                <Label text="n = " style="-fx-font-size: 16px;"/>
+                <!-- Поле ввода — fx:id связывает его с полем fieldN в контроллере -->
+                <TextField fx:id="fieldN" prefWidth="150"/>
+            </HBox>
+
+            <!-- Кнопка — onAction вызывает метод onCalculate в контроллере -->
+            <Button text="Посчитать цифры" onAction="#onCalculate" style="-fx-font-size: 14px;"/>
+
+        </VBox>
+    </center>
+
+    <!-- Нижняя часть окна -->
+    <bottom>
+        <!-- VBox — снова вертикальное расположение -->
+        <VBox spacing="10">
+            <!-- Отступы вокруг -->
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- Заголовок -->
+            <Label text="Результат:" style="-fx-font-weight: bold;"/>
+
+            <!-- HBox — результат в строку -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Количество цифр:" style="-fx-font-size: 14px;"/>
+                <!-- Сюда выводится результат — связан с lblResult в контроллере -->
+                <Label fx:id="lblResult" text="---" style="-fx-font-size: 16px; -fx-text-fill: #007AFF;"/>
+            </HBox>
+
+            <!-- Заголовок отчёта -->
+            <Label text="Подробный отчёт:" style="-fx-font-weight: bold;"/>
+
+            <!-- Многострочное поле — сюда выводится пошаговый отчёт -->
+            <TextArea fx:id="txtReport" editable="false" wrapText="true" prefRowCount="8"/>
+        </VBox>
+    </bottom>
+
+</BorderPane>
